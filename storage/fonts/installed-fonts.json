@@ -1,0 +1,28 @@
+{
+    "dejavu sans light": {
+        "normal": "DejaVuSans-ExtraLight"
+    },
+    "dejavu sans condensed": {
+        "bold": "DejaVuSansCondensed-Bold",
+        "bold_italic": "DejaVuSansCondensed-BoldOblique",
+        "italic": "DejaVuSansCondensed-Oblique",
+        "normal": "DejaVuSansCondensed"
+    },
+    "dejavu serif condensed": {
+        "bold": "DejaVuSerifCondensed-Bold",
+        "bold_italic": "DejaVuSerifCondensed-BoldItalic",
+        "italic": "DejaVuSerifCondensed-Italic",
+        "normal": "DejaVuSerifCondensed"
+    },
+    "bangla": {
+        "R": "SolaimanLipi",
+        "B": "SolaimanLipi_Bold",
+        "I": "SolaimanLipi",
+        "BI": "SolaimanLipi",
+        "useOTL": 255,
+        "useKashida": 75
+    },
+    "solaimanlipi": {
+        "normal": "solaimanlipi_normal_dc021b9bf6f76366278b96c1da36f380"
+    }
+}
