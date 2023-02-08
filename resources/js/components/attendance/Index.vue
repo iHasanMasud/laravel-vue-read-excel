@@ -15,10 +15,10 @@
                     </div>
                     <div class="col">
                         <b-input-group>
-                            <b-form-input v-model="filter" placeholder="Type to Search">
+                            <b-form-input v-model="searchTerm" placeholder="Type to Search" @keyup="fetchData(null)">
                             </b-form-input>
                             <b-input-group-append>
-                                <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+                                <b-button :disabled="!searchTerm" @click="searchTerm = ''">Clear</b-button>
                             </b-input-group-append>
                         </b-input-group>
                     </div>
@@ -46,8 +46,6 @@
                                 striped
                                 :items="items"
                                 :fields="fields"
-                                :filter="filter"
-                                :filter-included-fields="['employee_id']"
                                 :current-page="currentPage"
                                 :per-page="0">
                                 <template #cell(first_in)="{ item }">
@@ -79,7 +77,7 @@ export default {
     data() {
         return {
             loading: false,
-            filter: null,
+            searchTerm: '',
             items: [],
             fields: [
                 {key: 'month', label: 'Month'},
@@ -110,7 +108,7 @@ export default {
          * @description: This method is used to get the attendance report.
          * */
         async fetchData(currentPage) {
-            const response = await fetch(`/api/attendance/report?page=${currentPage}`).then(resp => resp.json())
+            const response = await fetch(`/api/attendance/report?page=${currentPage}&searchTerm=${this.searchTerm}`).then(resp => resp.json())
             this.perPage = response.meta.per_page;
             this.items = response.data;
             this.totalRows = response.meta.total;

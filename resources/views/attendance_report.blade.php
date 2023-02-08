@@ -16,8 +16,8 @@
             src: url('{{ storage_path('fonts/SolaimanLipi.ttf') }}') format('truetype');
         }
         body {
-            font-family:  SolaimanLipi,DejaVu Sans, sans-serif ,Helvetica!important;
-            font-size: 14px;
+            font-family:  SolaimanLipi,DejaVu Sans, sans-serif,Helvetica!important;
+            font-size: 10px;
         }
     </style>
 </head>

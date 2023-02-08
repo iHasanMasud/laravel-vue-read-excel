@@ -24,7 +24,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       loading: false,
-      filter: null,
+      searchTerm: '',
       items: [],
       fields: [{
         key: 'month',
@@ -80,7 +80,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return fetch("/api/attendance/report?page=".concat(currentPage)).then(function (resp) {
+                return fetch("/api/attendance/report?page=".concat(currentPage, "&searchTerm=").concat(_this.searchTerm)).then(function (resp) {
                   return resp.json();
                 });
 
@@ -217,20 +217,25 @@ var render = function render() {
     attrs: {
       placeholder: "Type to Search"
     },
+    on: {
+      keyup: function keyup($event) {
+        return _vm.fetchData(null);
+      }
+    },
     model: {
-      value: _vm.filter,
+      value: _vm.searchTerm,
       callback: function callback($$v) {
-        _vm.filter = $$v;
+        _vm.searchTerm = $$v;
       },
-      expression: "filter"
+      expression: "searchTerm"
     }
   }), _vm._v(" "), _c("b-input-group-append", [_c("b-button", {
     attrs: {
-      disabled: !_vm.filter
+      disabled: !_vm.searchTerm
     },
     on: {
       click: function click($event) {
-        _vm.filter = "";
+        _vm.searchTerm = "";
       }
     }
   }, [_vm._v("Clear")])], 1)], 1)], 1), _vm._v(" "), _c("div", {
@@ -266,8 +271,6 @@ var render = function render() {
       striped: "",
       items: _vm.items,
       fields: _vm.fields,
-      filter: _vm.filter,
-      "filter-included-fields": ["employee_id"],
       "current-page": _vm.currentPage,
       "per-page": 0
     },
