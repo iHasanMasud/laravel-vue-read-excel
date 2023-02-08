@@ -52,7 +52,7 @@
                                     <p :class="item.late_entry ? 'bg-warning' : ''">{{ item.first_in }}</p>
                                 </template>
                                 <template #cell(last_out)="{ item }">
-                                    <span :class="item.early_exit ? 'bg-danger' : ''">{{ item.last_out }}</span>
+                                    <span :class="item.early_exit ? 'bg-warning' : ''">{{ item.last_out }}</span>
                                 </template>
                             </b-table>
                             <b-pagination

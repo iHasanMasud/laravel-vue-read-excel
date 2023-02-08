@@ -287,7 +287,7 @@ var render = function render() {
       fn: function fn(_ref2) {
         var item = _ref2.item;
         return [_c("span", {
-          "class": item.early_exit ? "bg-danger" : ""
+          "class": item.early_exit ? "bg-warning" : ""
         }, [_vm._v(_vm._s(item.last_out))])];
       }
     }])
