@@ -147,8 +147,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   var url = window.URL.createObjectURL(new Blob([response.data]));
                   var link = document.createElement('a');
                   link.href = url;
-                  link.setAttribute('download', 'attendance_report.pdf'); //or any other extension
-
+                  link.setAttribute('download', 'attendance_report.pdf');
                   document.body.appendChild(link);
                   link.click();
                   _this3.loading = false;
