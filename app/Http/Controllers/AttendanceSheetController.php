@@ -32,7 +32,16 @@ class AttendanceSheetController extends Controller
      * Get attendance sheet with pagination.
      */
     public function getAttendanceReport(Request $request){
-        $attendanceSheets = AttendanceSheet::orderBy('id', 'desc')->paginate(10);
+        $searchTerm = $request->searchTerm;
+        //$attendanceSheets = AttendanceSheet::orderBy('id', 'desc')->paginate(10);
+        $query = AttendanceSheet::orderBy('id', 'desc');
+        if($searchTerm){
+            $query->where('employee_id', 'like', '%' . $searchTerm . '%')
+                ->orWhere('department', 'like', '%' . $searchTerm . '%')
+                ->orWhere('employee_name', 'like', '%' . $searchTerm . '%');
+        }
+
+        $attendanceSheets = $query->paginate(10);
         return new AttendanceSheetCollection($attendanceSheets);
     }
 

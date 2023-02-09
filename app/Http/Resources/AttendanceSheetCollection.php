@@ -24,13 +24,12 @@ class AttendanceSheetCollection extends ResourceCollection
                 if (!$data->first_in_time) {
                     $late_entry = true;
                 } else {
-                    $late_entry = (strtotime($data->first_in_time->format('H:i:s')) > strtotime($attendance_settings->in_time)) ? true : false;
-
+                    $late_entry = strtotime($data->first_in_time->format('H:i:s')) > strtotime($attendance_settings->in_time);
                 }
                 if (!$data->last_out_time) {
                     $early_exit = true;
                 } else {
-                    $early_exit = (strtotime($data->last_out_time->format('H:i:s')) < strtotime($attendance_settings->out_time)) ? true : false;
+                    $early_exit = strtotime($data->last_out_time->format('H:i:s')) < strtotime($attendance_settings->out_time);
                 }
 
                 // Calculate total working hours

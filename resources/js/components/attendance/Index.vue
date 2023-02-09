@@ -15,10 +15,10 @@
                     </div>
                     <div class="col">
                         <b-input-group>
-                            <b-form-input v-model="filter" placeholder="Type to Search">
+                            <b-form-input v-model="searchTerm" placeholder="Type to Search" @keyup="fetchData(null)">
                             </b-form-input>
                             <b-input-group-append>
-                                <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+                                <b-button :disabled="!searchTerm" @click="searchTerm = ''">Clear</b-button>
                             </b-input-group-append>
                         </b-input-group>
                     </div>
@@ -46,15 +46,13 @@
                                 striped
                                 :items="items"
                                 :fields="fields"
-                                :filter="filter"
-                                :filter-included-fields="['employee_id']"
                                 :current-page="currentPage"
                                 :per-page="0">
                                 <template #cell(first_in)="{ item }">
                                     <p :class="item.late_entry ? 'bg-warning' : ''">{{ item.first_in }}</p>
                                 </template>
                                 <template #cell(last_out)="{ item }">
-                                    <span :class="item.early_exit ? 'bg-danger' : ''">{{ item.last_out }}</span>
+                                    <span :class="item.early_exit ? 'bg-warning' : ''">{{ item.last_out }}</span>
                                 </template>
                             </b-table>
                             <b-pagination
@@ -79,7 +77,7 @@ export default {
     data() {
         return {
             loading: false,
-            filter: null,
+            searchTerm: '',
             items: [],
             fields: [
                 {key: 'month', label: 'Month'},
@@ -110,7 +108,7 @@ export default {
          * @description: This method is used to get the attendance report.
          * */
         async fetchData(currentPage) {
-            const response = await fetch(`/api/attendance/report?page=${currentPage}`).then(resp => resp.json())
+            const response = await fetch(`/api/attendance/report?page=${currentPage}&searchTerm=${this.searchTerm}`).then(resp => resp.json())
             this.perPage = response.meta.per_page;
             this.items = response.data;
             this.totalRows = response.meta.total;
@@ -139,7 +137,7 @@ export default {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');
                 link.href = url;
-                link.setAttribute('download', 'attendance_report.pdf'); //or any other extension
+                link.setAttribute('download', 'attendance_report.pdf');
                 document.body.appendChild(link);
                 link.click();
                 this.loading = false;

@@ -16,8 +16,11 @@
             src: url('{{ storage_path('fonts/SolaimanLipi.ttf') }}') format('truetype');
         }
         body {
-            font-family:  SolaimanLipi,DejaVu Sans, sans-serif ,Helvetica!important;
-            font-size: 14px;
+            font-family:  SolaimanLipi,DejaVu Sans, sans-serif,Helvetica!important;
+            font-size: 10px;
+        }
+        .bg-warning {
+            background-color: #ffc107!important;
         }
     </style>
 </head>
@@ -47,8 +50,8 @@
                 <td>{{ $data['employee_id'] }}</td>
                 <td>{{ $data['employee_name'] }}</td>
                 <td>{{ $data['department'] }}</td>
-                <td>{{ $data['first_in'] }}</td>
-                <td>{{ $data['last_out'] }}</td>
+                <td class="{{$data['late_entry'] ? 'bg-warning' : ''}}">{{ $data['first_in'] }}</td>
+                <td class="{{$data['early_exit'] ? 'bg-warning' : ''}}">{{ $data['last_out'] }}</td>
                 <td>{{ $data['hours_of_work'] }}</td>
             </tr>
         @endforeach
